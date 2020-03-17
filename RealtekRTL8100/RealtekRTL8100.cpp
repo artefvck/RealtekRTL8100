@@ -1250,6 +1250,7 @@ done:
 void RTL8100::getParams()
 {
     OSNumber *intrMit;
+    OSBoolean *enEEE;
     OSBoolean *poll;
     OSBoolean *tso4;
     OSBoolean *tso6;
@@ -1262,7 +1263,8 @@ void RTL8100::getParams()
     
     DebugLog("Ethernet [RealtekRTL8100]: PCIe ASPM support %s.\n", disableASPM ? offName : onName);
     
-    enableEEE = OSDynamicCast(OSBoolean, getProperty(kEnableEeeName));
+    enEEE = OSDynamicCast(OSBoolean, getProperty(kEnableEeeName));
+    enableEEE = (enEEE) ? enEEE->getValue() : false;
     
     IOLog("Ethernet [RealtekRTL8100]: EEE support %s.\n", enableEEE ? onName : offName);
     
