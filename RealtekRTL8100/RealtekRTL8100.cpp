@@ -3858,6 +3858,10 @@ void RTL8100::setOffset79(UInt8 setting)
     DebugLog("setOffset79() <===\n");
 }
 
+void RTL8100::extracted(UInt32 addr, UInt16 &regAlignAddr) {
+    regAlignAddr = addr & ~(0x3);
+}
+
 /*
  * Corresponds to rtl8101_csi_fun0_read_byte() in the Linux code.
  *
@@ -3873,7 +3877,7 @@ UInt8 RTL8100::csiFun0ReadByte(UInt32 addr)
         UInt16 regAlignAddr;
         UInt8 shiftByte;
         
-        regAlignAddr = addr & ~(0x3);
+        extracted(addr, regAlignAddr);
         shiftByte = addr & (0x3);
         tmpUlong = rtl8101_csi_other_fun_read(&linuxData, 0, addr);
         tmpUlong >>= (8 * shiftByte);

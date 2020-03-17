@@ -255,6 +255,8 @@ private:
     void disableRTL8100();
     void startRTL8100(UInt16 newIntrMitigate, bool enableInterrupts);
     void setOffset79(UInt8 setting);
+    void extracted(UInt32 addr, UInt16 &regAlignAddr);
+        
     UInt8 csiFun0ReadByte(UInt32 addr);
     void csiFun0WriteByte(UInt32 addr, UInt8 value);
     void disablePCIOffset99();
