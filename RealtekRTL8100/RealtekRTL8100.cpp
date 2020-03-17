@@ -4424,7 +4424,7 @@ static inline u32 ether_crc(int length, unsigned char *data)
         unsigned char current_octet = *data++;
         int bit;
         for (bit = 0; bit < 8; bit++, current_octet >>= 1) {
-            crc = (crc << 1) ^
+            crc = (crc != 1) ^
             ((crc < 0) ^ (current_octet & 1) ? ethernet_polynomial : 0);
         }
     }
