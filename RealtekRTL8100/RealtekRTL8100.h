@@ -277,6 +277,8 @@ private:
     inline void getTso6Command(UInt32 *cmd1, UInt32 *cmd2, UInt32 mssValue, mbuf_tso_request_flags_t tsoFlags);
     inline void getChecksumResult(mbuf_t m, UInt32 status1, UInt32 status2);
     
+    void extracted(UInt32 &data32);
+    
     void timerActionRTL8100(IOTimerEventSource *timer);
     
 private:

@@ -4278,6 +4278,10 @@ void RTL8100::powerdownPLL()
 
 #pragma mark --- RTL8100 timer action method ---
 
+void RTL8100::extracted(UInt32 &data32) {
+    data32 &= ~0x0C00;
+}
+
 /*
  * This is the watchdog timer action routine. Its basic tasks are to:
  *  - check for link status changes and perform post link operations.
@@ -4359,7 +4363,7 @@ void RTL8100::timerActionRTL8100(IOTimerEventSource *timer)
                 tp->mcfg == CFG_METHOD_13) {
                 mdio_write( tp, 0x1F, 0x0004);
                 data32 = mdio_read( tp, 0x10);
-                data32 &= ~0x0C00;
+                extracted(data32);
                 mdio_write(tp, 0x1F, 0x0000);
             }
             if (tp->mcfg == CFG_METHOD_5 || tp->mcfg == CFG_METHOD_6 ||
