@@ -307,9 +307,9 @@ static inline bool is_zero_ether_addr(const u8 *addr)
 #if defined(CONFIG_HAVE_EFFICIENT_UNALIGNED_ACCESS)
     return ((*(const u32 *)addr) | (*(const u16 *)(addr + 4))) == 0;
 #else
-    return (*(const u16 *)(addr + 0) |
-            *(const u16 *)(addr + 2) |
-            *(const u16 *)(addr + 4)) == 0;
+    return ((*(const u16 *)addr + 0) |
+            (*(const u16 *)addr + 2) |
+            (*(const u16 *)addr + 4)) == 0;
 #endif
 }
 
